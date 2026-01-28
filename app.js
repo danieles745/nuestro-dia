@@ -102,32 +102,52 @@ function calculateTimeRemaining() {
 
 // 💕 Mostrar contador
 function updateCountdown() {
-  const time = calculateTimeRemaining();
+  const now = new Date();
+  const target = targetDate;
 
-  if (!time) {
-    container.classList.add("special-day");
-    countdownEl.innerHTML = `
-      <div class="time-box" style="grid-column: span 2;">
-        <div class="time-value">🎉</div>
-        <div class="time-label">Es hoy · È oggi</div>
-      </div>
-    `;
-    quoteEl.innerHTML = `
-      💖 Hoy es el día de Lindo & Linda<br>
-      🇪🇸 Te quiero más que ayer y menos que mañana, Linda — Lindo<br>
-      🇮🇹 Ti voglio più di ieri e meno di domani, Linda — Lindo
-    `;
+  if (now >= target) {
+    showSpecialMessage();
     return;
   }
 
-  countdownEl.innerHTML = `
-    ${renderBox(time.months, "Meses", "Mesi")}
-    ${renderBox(time.days, "Días", "Giorni")}
-    ${renderBox(time.hours.toString().padStart(2, "0"), "Horas", "Ore")}
-    ${renderBox(time.minutes.toString().padStart(2, "0"), "Minutos", "Minuti")}
-    ${renderBox(time.seconds.toString().padStart(2, "0"), "Segundos", "Secondi")}
-  `;
+  let years = target.getFullYear() - now.getFullYear();
+  let months = target.getMonth() - now.getMonth();
+  let days = target.getDate() - now.getDate();
+  let hours = target.getHours() - now.getHours();
+  let minutes = target.getMinutes() - now.getMinutes();
+  let seconds = target.getSeconds() - now.getSeconds();
+
+  if (seconds < 0) {
+    seconds += 60;
+    minutes--;
+  }
+  if (minutes < 0) {
+    minutes += 60;
+    hours--;
+  }
+  if (hours < 0) {
+    hours += 24;
+    days--;
+  }
+  if (days < 0) {
+    const prevMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    days += prevMonth;
+    months--;
+  }
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
+
+  const totalMonths = years * 12 + months;
+
+  document.getElementById('months').textContent = totalMonths;
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
 }
+
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
