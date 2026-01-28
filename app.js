@@ -1,9 +1,57 @@
-const targetDate = new Date("2026-06-01T00:00:00+01:00"); // Irlanda (DST se ajusta automáticamente)
+const targetDate = new Date("2026-06-01T00:00:00+01:00"); // Irlanda
 
 const countdownEl = document.getElementById("countdown");
+const quoteEl = document.getElementById("dailyQuote");
 const notifyBtn = document.getElementById("notifyBtn");
+const themeBtn = document.getElementById("themeBtn");
+const heartbeatSound = document.getElementById("heartbeatSound");
+const container = document.querySelector(".container");
 
-// 💕 Render romántico
+// 💖 FRASES ROMÁNTICAS ROTATIVAS — L&L
+const romanticQuotes = [
+  {
+    es: "Nuestro día favorito, con amor — Lindo & Linda ❤️",
+    it: "Il nostro giorno preferito, con amore — Lindo & Linda ❤️"
+  },
+  {
+    es: "Cada segundo que pasa acerca a Lindo un poco más a Linda.",
+    it: "Ogni secondo che passa avvicina Lindo un po’ di più a Linda."
+  },
+  {
+    es: "La distancia no separa corazones que laten juntos — L&L.",
+    it: "La distanza non separa cuori che battono insieme — L&L."
+  },
+  {
+    es: "Amarte, Linda, es la forma favorita de existir de Lindo.",
+    it: "Amarti, Linda, è il modo preferito di esistere di Lindo."
+  },
+  {
+    es: "Nuestro amor sabe esperar, porque sabe llegar — L&L.",
+    it: "Il nostro amore sa aspettare, perché sa arrivare — L&L."
+  },
+  {
+    es: "Dos almas, un destino, un día inevitable — Lindo & Linda.",
+    it: "Due anime, un destino, un giorno inevitabile — Lindo & Linda."
+  },
+  {
+    es: "Incluso lejos, Linda siempre está en el corazón de Lindo ❤️",
+    it: "Anche lontani, Linda è sempre nel cuore di Lindo ❤️"
+  },
+  {
+    es: "Cada latido de Lindo es un paso más hacia Linda.",
+    it: "Ogni battito di Lindo è un passo in più verso Linda."
+  },
+  {
+    es: "Nuestro tiempo juntos ya estaba escrito para L&L.",
+    it: "Il nostro tempo insieme era già scritto per L&L."
+  },
+  {
+    es: "No contamos días… contamos latidos — Lindo & Linda ❤️",
+    it: "Non contiamo i giorni… contiamo i battiti — Lindo & Linda ❤️"
+  }
+];
+
+// 💕 Utilidades
 function renderBox(value, labelEs, labelIt) {
   return `
     <div class="time-box">
@@ -13,7 +61,7 @@ function renderBox(value, labelEs, labelIt) {
   `;
 }
 
-// 💖 Cálculo de meses reales + resto exacto
+// 💖 Tiempo restante con meses reales
 function calculateTimeRemaining() {
   const now = new Date();
   if (now >= targetDate) return null;
@@ -52,16 +100,22 @@ function calculateTimeRemaining() {
   };
 }
 
-// 💕 Actualiza UI
+// 💕 Mostrar contador
 function updateCountdown() {
   const time = calculateTimeRemaining();
 
   if (!time) {
+    container.classList.add("special-day");
     countdownEl.innerHTML = `
       <div class="time-box" style="grid-column: span 2;">
-        <div class="time-value">💖</div>
+        <div class="time-value">🎉</div>
         <div class="time-label">Es hoy · È oggi</div>
       </div>
+    `;
+    quoteEl.innerHTML = `
+      💖 Hoy es el día de Lindo & Linda<br>
+      🇪🇸 Te quiero más que ayer y menos que mañana, Linda — Lindo<br>
+      🇮🇹 Ti voglio più di ieri e meno di domani, Linda — Lindo
     `;
     return;
   }
@@ -78,7 +132,52 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// 💌 Notificaciones románticas diarias
+// 💌 FRASE ROMÁNTICA DIARIA ROTATIVA
+function updateDailyQuote() {
+  const today = new Date().toDateString();
+  const saved = localStorage.getItem("dailyQuoteDate");
+
+  if (saved !== today) {
+    const random = Math.floor(Math.random() * romanticQuotes.length);
+    localStorage.setItem("dailyQuoteIndex", random);
+    localStorage.setItem("dailyQuoteDate", today);
+  }
+
+  const index = parseInt(localStorage.getItem("dailyQuoteIndex"), 10) || 0;
+  const q = romanticQuotes[index];
+
+  quoteEl.style.opacity = 0;
+  setTimeout(() => {
+    quoteEl.innerHTML = `
+      🇪🇸 ${q.es}<br>
+      🇮🇹 ${q.it}
+    `;
+    quoteEl.style.opacity = 1;
+  }, 300);
+}
+
+updateDailyQuote();
+
+// 🔊 Sonido suave al abrir
+window.addEventListener("load", () => {
+  heartbeatSound.volume = 0.25;
+  heartbeatSound.play().catch(() => {});
+});
+
+// 🌙 Modo oscuro persistente
+function applyTheme(theme) {
+  document.body.classList.toggle("dark", theme === "dark");
+  localStorage.setItem("theme", theme);
+}
+
+themeBtn.addEventListener("click", () => {
+  const current = localStorage.getItem("theme") || "light";
+  applyTheme(current === "light" ? "dark" : "light");
+});
+
+applyTheme(localStorage.getItem("theme") || "light");
+
+// 💌 NOTIFICACIONES DIARIAS L&L
 async function enableNotifications() {
   if (!("Notification" in window)) {
     alert("Tu navegador no soporta notificaciones 😢");
@@ -89,16 +188,15 @@ async function enableNotifications() {
   if (permission !== "granted") return;
 
   scheduleDailyNotification();
-  alert("💖 Recordatorios activados. Cada día te recordará cuánto falta.");
+  alert("💖 Recordatorios activados para L&L. Cada día sabrás cuánto falta.");
 }
 
 function scheduleDailyNotification() {
   const now = new Date();
   const next = new Date();
-  next.setHours(9, 0, 0, 0); // 9am local
+  next.setHours(9, 0, 0, 0);
 
   if (next <= now) next.setDate(next.getDate() + 1);
-
   const timeout = next - now;
 
   setTimeout(() => {
@@ -111,18 +209,19 @@ function sendNotification() {
   const time = calculateTimeRemaining();
   if (!time) return;
 
-  const bodyEs = `Faltan ${time.months} meses, ${time.days} días y ${time.hours} horas para nuestro día favorito 💖`;
-  const bodyIt = `Mancano ${time.months} mesi, ${time.days} giorni e ${time.hours} ore al nostro giorno preferito 💖`;
+  const bodyEs = `Lindo ❤️ Linda\nFaltan ${time.months} meses, ${time.days} días y ${time.hours} horas para su día favorito`;
+  const bodyIt = `Lindo ❤️ Linda\nMancano ${time.months} mesi, ${time.days} giorni e ${time.hours} ore al loro giorno preferito`;
 
-  new Notification("💌 Nuestro día favorito", {
+  new Notification("💌 L&L — Nuestro día favorito", {
     body: `${bodyEs}\n${bodyIt}\n\nCada segundo nos acerca más ✨`,
-    icon: "icon-192.png"
+    icon: "images/icon-192.png",
+    vibrate: [120, 60, 120]
   });
 }
 
 notifyBtn.addEventListener("click", enableNotifications);
 
-// 📱 PWA install
+// 📱 Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
 }

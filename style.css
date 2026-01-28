@@ -1,92 +1,150 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
 
+:root {
+  --bg-light: linear-gradient(135deg, #7b001c, #b11226);
+  --bg-dark: linear-gradient(135deg, #1a0005, #3a000d);
+  --card-light: rgba(255, 255, 255, 0.15);
+  --card-dark: rgba(0, 0, 0, 0.35);
+  --accent: #b11226;
+  --text-light: #fff;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: var(--text-light);
   text-align: center;
+  background: var(--bg-light);
+  transition: background 0.5s ease;
+}
+
+body.dark {
+  background: var(--bg-dark);
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--card-light);
   backdrop-filter: blur(12px);
-  border-radius: 24px;
-  padding: 32px 24px;
+  border-radius: 28px;
+  padding: 28px 22px;
   max-width: 360px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+body.dark .container {
+  background: var(--card-dark);
+}
+
+.logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  box-shadow: 0 0 18px rgba(255,255,255,0.3);
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   margin-bottom: 4px;
 }
 
 .subtitle {
-  opacity: 0.85;
-  margin-bottom: 24px;
+  opacity: 0.9;
+  margin-bottom: 18px;
 }
 
 .countdown {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  margin: 20px 0 28px;
+  gap: 12px;
+  margin: 18px 0 24px;
 }
 
 .time-box {
   background: rgba(255,255,255,0.25);
   border-radius: 16px;
-  padding: 14px 8px;
+  padding: 12px 8px;
   box-shadow: inset 0 0 12px rgba(255,255,255,0.15);
 }
 
+body.dark .time-box {
+  background: rgba(0,0,0,0.45);
+}
+
 .time-value {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
 }
 
 .time-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   opacity: 0.9;
 }
 
 .date {
-  font-size: 0.85rem;
-  margin-bottom: 12px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
   opacity: 0.9;
 }
 
 .quote {
   font-style: italic;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  min-height: 48px;
+  transition: opacity 0.6s ease;
 }
 
 button {
-  background: #ff5c8a;
+  background: var(--accent);
   border: none;
   border-radius: 999px;
-  padding: 12px 18px;
+  padding: 11px 16px;
   color: #fff;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(255,92,138,0.4);
+  box-shadow: 0 10px 20px rgba(177,18,38,0.45);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin: 4px;
 }
 
 button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(255,92,138,0.55);
+  box-shadow: 0 12px 26px rgba(177,18,38,0.6);
 }
 
 footer {
-  margin-top: 18px;
-  font-size: 0.7rem;
+  margin-top: 14px;
+  font-size: 0.65rem;
   opacity: 0.8;
+}
+
+/* ❤️ Animación de latido */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.02); }
+  40% { transform: scale(0.98); }
+  60% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.heartbeat {
+  animation: heartbeat 2.4s infinite ease-in-out;
+}
+
+/* 🎉 Día especial */
+.special-day {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px rgba(255,100,120,0.6); }
+  to { box-shadow: 0 0 40px rgba(255,140,160,0.9); }
 }

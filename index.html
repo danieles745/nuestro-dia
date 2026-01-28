@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nuestro Día ❤️</title>
+  <title>L&L ❤️ Nuestro Día</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#ff5c8a" />
+  <meta name="theme-color" content="#7b001c" />
 </head>
 <body>
-  <div class="container">
-    <h1>💖 Nuestro día favorito, con amor</h1>
-    <p class="subtitle">🇪🇸 / 🇮🇹</p>
+  <audio id="heartbeatSound" src="audio/heartbeat.mp3" preload="auto"></audio>
+
+  <div class="container heartbeat">
+    <img src="images/logo.png" alt="Lindo & Linda" class="logo" />
+
+    <h1>❤️ L&L — Nuestro día favorito</h1>
+    <p class="subtitle">Lindo & Linda · 🇪🇸 / 🇮🇹</p>
 
     <div id="countdown" class="countdown"></div>
 
     <p class="date">📅 1 de junio de 2026 · 00:00 Irlanda</p>
 
-    <p class="quote">“Cada segundo nos acerca más” ✨</p>
+    <p id="dailyQuote" class="quote"></p>
 
-    <button id="notifyBtn">💌 Activar recordatorios diarios</button>
+    <button id="notifyBtn">💌 Activar recordatorios de L&L</button>
+    <button id="themeBtn">🌙 Cambiar modo</button>
 
     <footer>
-      <p>Hecho con amor desde dos mundos 🌍❤️</p>
+      <p>Hecho con amor por Lindo para Linda ❤️ y por Linda para Lindo 🌍</p>
     </footer>
   </div>
 
