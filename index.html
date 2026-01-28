@@ -2,33 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>L&L ❤️ Nuestro Día</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>L&L — Nuestro Día Favorito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#7b001c" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#8B0000" />
 </head>
 <body>
-  <audio id="heartbeatSound" src="audio/heartbeat.mp3" preload="auto"></audio>
+  <audio id="heartbeat" src="audio/heartbeat.mp3" preload="auto"></audio>
 
-  <div class="container heartbeat">
-    <img src="images/logo.png" alt="Lindo & Linda" class="logo" />
+  <div class="app">
+    <img src="images/icon-192.png" class="logo" alt="L&L" />
 
-    <h1>❤️ L&L — Nuestro día favorito</h1>
-    <p class="subtitle">Lindo & Linda · 🇨🇴 / 🇮🇹</p>
+    <h1>L&L 🇨🇴</h1>
+    <h2>Nuestro día favorito</h2>
+    <p class="subtitle">Lindo & Linda — te quiero tanto!</p>
 
-    <div id="countdown" class="countdown"></div>
+    <!-- ❤️ CONTADOR -->
+    <div class="countdown heartbeat" id="countdown">
+      <div><span id="months">0</span><label>Meses</label></div>
+      <div><span id="days">0</span><label>Días</label></div>
+      <div><span id="hours">0</span><label>Horas</label></div>
+      <div><span id="minutes">0</span><label>Minutos</label></div>
+      <div><span id="seconds">0</span><label>Segundos</label></div>
+    </div>
 
-    <p class="date">📅 1 de junio de 2026 · 00:00 Irlanda</p>
+    <p class="phrase" id="dailyPhrase"></p>
 
-    <p id="dailyQuote" class="quote"></p>
+    <p class="footer">
+      Cada segundo nos acerca más ❤️<br />
+      Ogni secondo ci avvicina di più ❤️
+    </p>
 
-    <button id="notifyBtn">💌 Activar recordatorios de L&L</button>
-    <button id="themeBtn">🌙 Cambiar modo</button>
-
-    <footer>
-      <p>Hecho con amor por Lindo para Linda ❤️ y por Linda para Lindo 🌍</p>
-    </footer>
+    <button id="notifyBtn">Activar recordatorios diarios 💌</button>
   </div>
 
   <script src="app.js"></script>
