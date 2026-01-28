@@ -149,7 +149,7 @@ function updateDailyQuote() {
   quoteEl.style.opacity = 0;
   setTimeout(() => {
     quoteEl.innerHTML = `
-      🇪🇸 ${q.es}<br>
+      🇨🇴 ${q.co}<br>
       🇮🇹 ${q.it}
     `;
     quoteEl.style.opacity = 1;
