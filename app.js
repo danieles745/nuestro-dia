@@ -10,43 +10,43 @@ const container = document.querySelector(".container");
 // 💖 FRASES ROMÁNTICAS ROTATIVAS — L&L
 const romanticQuotes = [
   {
-    es: "Nuestro día favorito, con amor — Lindo & Linda ❤️",
+    co: "Nuestro día favorito, con amor — Lindo & Linda ❤️",
     it: "Il nostro giorno preferito, con amore — Lindo & Linda ❤️"
   },
   {
-    es: "Cada segundo que pasa acerca a Lindo un poco más a Linda.",
+    co: "Cada segundo que pasa acerca a Lindo un poco más a Linda.",
     it: "Ogni secondo che passa avvicina Lindo un po’ di più a Linda."
   },
   {
-    es: "La distancia no separa corazones que laten juntos — L&L.",
+    co: "La distancia no separa corazones que laten juntos — L&L.",
     it: "La distanza non separa cuori che battono insieme — L&L."
   },
   {
-    es: "Amarte, Linda, es la forma favorita de existir de Lindo.",
+    co: "Amarte, Linda, es la forma favorita de existir de Lindo.",
     it: "Amarti, Linda, è il modo preferito di esistere di Lindo."
   },
   {
-    es: "Nuestro amor sabe esperar, porque sabe llegar — L&L.",
+    co: "Nuestro amor sabe esperar, porque sabe llegar — L&L.",
     it: "Il nostro amore sa aspettare, perché sa arrivare — L&L."
   },
   {
-    es: "Dos almas, un destino, un día inevitable — Lindo & Linda.",
+    co: "Dos almas, un destino, un día inevitable — Lindo & Linda.",
     it: "Due anime, un destino, un giorno inevitabile — Lindo & Linda."
   },
   {
-    es: "Incluso lejos, Linda siempre está en el corazón de Lindo ❤️",
+    co: "Incluso lejos, Linda siempre está en el corazón de Lindo ❤️",
     it: "Anche lontani, Linda è sempre nel cuore di Lindo ❤️"
   },
   {
-    es: "Cada latido de Lindo es un paso más hacia Linda.",
+    co: "Cada latido de Lindo es un paso más hacia Linda.",
     it: "Ogni battito di Lindo è un passo in più verso Linda."
   },
   {
-    es: "Nuestro tiempo juntos ya estaba escrito para L&L.",
+    co: "Nuestro tiempo juntos ya estaba escrito para L&L.",
     it: "Il nostro tempo insieme era già scritto per L&L."
   },
   {
-    es: "No contamos días… contamos latidos — Lindo & Linda ❤️",
+    co: "No contamos días… contamos latidos — Lindo & Linda ❤️",
     it: "Non contiamo i giorni… contiamo i battiti — Lindo & Linda ❤️"
   }
 ];
