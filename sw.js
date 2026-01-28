@@ -1,24 +1,33 @@
-const CACHE_NAME = "nuestro-dia-v1";
-const FILES = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./app.js",
-  "./manifest.json",
-  "./images/icon-192.png",
-  "./images/icon-512.png",
-  "./images/logo.png",
-  "./audio/heartbeat.mp3"
-];
+const CACHE = 'l-and-l-v2';
 
-self.addEventListener("install", (e) => {
+self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES))
+    caches.open(CACHE).then(cache =>
+      cache.addAll([
+        './',
+        './index.html',
+        './style.css',
+        './app.js',
+        './manifest.json',
+        './audio/heartbeat.mp3',
+        './images/logo.png'
+      ])
+    )
   );
 });
 
-self.addEventListener("fetch", (e) => {
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });
